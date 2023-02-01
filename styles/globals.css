@@ -75,7 +75,6 @@
   filter: blur(200px);
   transform: rotate(-53.13deg);
 }
-
 .gradient-05 {
   background: linear-gradient(
     180deg,
@@ -372,7 +371,7 @@ html{
   width: 70%;
 }
 .blog{
-  width: 70%;
+  width: 40%;
   border-radius: 25px;
 }
 .content{

@@ -11,6 +11,8 @@ const urlBuilder = imageUrlBuilder(client)
 const Post = ({ blog }) => {
   const router = useRouter()
   const { slug } = router.query
+  console.log(blog.author)
+
   return <><>
     <Head>
       <meta charset="utf-8" />
@@ -48,9 +50,9 @@ const Post = ({ blog }) => {
 
 
     </Head>
-    <div className=''>
       <Navbar />
-      <TitleText title={<>{blog.title}</>} textStyles="text-center" />
+    <div className=' flex items-center flex-col mt-5 '>
+      <h1 className="text-white font-extrabold" style={{fontSize:'30px'}}>{blog.title}</h1>
       <img src={urlBuilder.image(blog.mainImage).toString()} className='blog w-[50%] m-auto rounded-3xl' alt={blog.title} />
       <div className="content w-full m-auto">
         <p className="sm-text  text-white m-auto ">{moment(blog.publishedAt).utc().fromNow()} </p>
@@ -66,9 +68,12 @@ const Post = ({ blog }) => {
         li: ({ children }) => <li className="special-list-item">{children}</li>,
       }}
     />
-      <Footer />
+      <div className='bg-black h-[300px]'>s</div>
+      <div className='bg-black h-[300px]'>s</div>
+      <div className='bg-black h-[300px]'>s</div>
+      <div className='bg-black h-[300px]'>s</div>
+      <div className='bg-black h-[300px]'>s</div>
     </div>
-
   </> </>
 }
 
