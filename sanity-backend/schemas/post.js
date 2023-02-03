@@ -11,8 +11,23 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'intro',
+      title: 'Intro',
+      type: 'string',
+    }),
+    defineField({
       name: 'desc',
       title: 'Desc',
+      type: 'string',
+    }),
+    defineField({
+      name: 'category1',
+      title: 'Category 1',
+      type: 'string',
+    }),
+    defineField({
+      name: 'category2',
+      title: 'Category 2',
       type: 'string',
     }),
     defineField({

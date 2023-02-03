@@ -31,7 +31,7 @@ const Insights = () => {
       <div className="mt-[50px] flex flex-col gap-[30px]">
         {blogs.map((item, index) => (
           <Link key={`insight-${index}`} href={"/blog/" + item.slug.current}>
-            <InsightCard   slug={item?.slug?.current} subtitle={item.desc} imgUrl={urlBuilder.image(item.mainImage).maxHeight(400).width(500).toString()} {...item} index={index + 1} />
+            <InsightCard   slug={item?.slug?.current} subtitle={item.desc} imgUrl={urlBuilder.image(item.mainImage).toString()} {...item} index={index + 1} />
           </Link>
         ))}
         <Link href='/blogs'><h1 className='text-white text-lg px-3 bg-slate-800 flex w-28 rounded-lg m-auto  items-center justify-center  p-1'>All Blogs</h1></Link>

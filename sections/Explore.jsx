@@ -48,7 +48,7 @@ const Explore = (posts) => {
             className="container-card"
             key={about.title + index}
           >
-            <img src={urlBuilder.image(about.imgUrl).maxHeight(400).width(500).toString()} className='showcase' alt={about.title} />
+            <img src={urlBuilder.image(about.imgUrl).toString()} className='showcase' alt={about.title} />
             <div className="card p-7 ">
             <h2 className="font-poppins font-semibold mt-5 xs:text-[24px] xs:leading-[30px] text-[20px] leading-[26px] tracking-[0.25%] dark:text-[#D0DFFF] text-[#3A4556]">{about.title}</h2>
             <p className="font-poppins xs:text-[16px] xs:leading-[22px] text-[14px] leading-[20px] font-normal dark:text-[#A3B3BC] text-[#5B6478] mb-4" style={{ marginTop: 10 }}>{about.description}</p>

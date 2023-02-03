@@ -8,11 +8,10 @@ import moment from "moment";
 import { client } from '../../client';
 const urlBuilder = imageUrlBuilder(client)
 
-const Post = ({ blog }) => {
+const Post = ({ blog,user }) => {
   const router = useRouter()
   const { slug } = router.query
-  console.log(blog.author)
-
+  console.log(user)
   return <><>
     <Head>
       <meta charset="utf-8" />
@@ -51,29 +50,50 @@ const Post = ({ blog }) => {
 
     </Head>
       <Navbar />
-    <div className=' flex items-center flex-col mt-5 '>
-      <h1 className="text-white font-extrabold" style={{fontSize:'30px'}}>{blog.title}</h1>
-      <img src={urlBuilder.image(blog.mainImage).toString()} className='blog w-[50%] m-auto rounded-3xl' alt={blog.title} />
-      <div className="content w-full m-auto">
-        <p className="sm-text  text-white m-auto ">{moment(blog.publishedAt).utc().fromNow()} </p>
+    <div className='bg-[#161b22] '>
+      <div className=' w-full flex items-center justify-center flex-col '>
+      {/* {user.name} */}
+      <div className='flex gap-5'>
+        <p className='text-gradient text-lg font-extrabold'>{blog.category1}</p>
+        <p className='orange_text-gradient text-lg font-extrabold'>{blog.category2}</p>
       </div>
+      {/* {category.map((item, index) => (
+        <div>{item.name}</div>
+      ))} */}
+      <p className='mt-20 text-white font-bold big'>{blog.title}</p>
+      <p className='text-white text-lg small'>{blog.intro}</p>
+      <img src={urlBuilder.image(blog.mainImage).toString()} className='blog-img relative'  alt={blog.title} />
+      </div>
+    </div>
+    <div className=' w-full sec-2'>
+
+    </div>
+      <div className='sec-main  flex items-center '>
+        <div className='flex flex-col items-center'>
+          <p className='author'>Author</p>
+          <div className='flex items-center gap-3 user'>
+
+          <img src={urlBuilder.image(user.authorImage).maxHeight(100).width(100).toString()} className='user-image'/>
+          <p className='font-bold text-white'>{user.name}</p>
+          </div>
+        </div>
+        <p className="sm-text publishDate text-white m-auto ">{moment(blog.publishedAt).utc().format('MMMM Do YYYY')} </p>
+        
+      </div>
+      <hr className='w-[50%] m-auto border'/>
+      <div className='w-[50%] m-auto content'>
       <PortableText
-      // Pass in block content straight from Sanity.io
       content={blog.body}
-      className='text-white flex items-center justify-center body m-auto'
-      // Optionally override marks, decorators, blocks, etc. in a flat
-      // structure without doing any gymnastics
+      className='text-white main_content body p-10'
       serializers={{
         h1: (props) => <h1 style={{ color: "red" }} {...props} />,
-        li: ({ children }) => <li className="special-list-item">{children}</li>,
+        h4: (props) => <h4 style={{ fontSize:'1.5rem',marginBottom:'10px',marginTop:'10px' }} {...props} />,
+        li: ({ children }) => <ul><li className="list-item text-lg discs">{children}</li></ul>,
       }}
     />
-      <div className='bg-black h-[300px]'>s</div>
-      <div className='bg-black h-[300px]'>s</div>
-      <div className='bg-black h-[300px]'>s</div>
-      <div className='bg-black h-[300px]'>s</div>
-      <div className='bg-black h-[300px]'>s</div>
-    </div>
+      </div>
+      
+    <Footer/>
   </> </>
 }
 
@@ -81,12 +101,16 @@ export default Post
 
 export const getServerSideProps = async (context) => {
   const { slug } = context.query
-  console.log(slug)
   const query = `*[_type == "post" && slug.current == '${slug}'][0]`;
+  const userquery = `*[_type == "post" && slug.current == '${slug}']{
+    "name": author->name,
+    "authorImage": author->image
+  }[0]`;
   const blog = await client.fetch(query);
+  const user = await client.fetch(userquery);
   return {
     props: {
-      blog
+      blog,user
     }
   }
 }
